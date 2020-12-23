@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+ {% block stylesheets %}
+     {{ parent() }}
+     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ {% endblock %}
+{% block body %}
+<div class="container">
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+   <div class="panel panel-info" >
+       <div style="padding-top:30px" class="panel-body" >
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+                <div class="class-group" style="margin-bottom: 25px">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                </div>
+                <div class="class-group" style="margin-bottom: 25px">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
+                </div>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <div class="form-group">
+                    <button style="margin-top:10px" class="btn btn-lg btn-primary" type="submit">
+                        Sign in
+                    </button>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12 control">
+                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                            Don't have an account!
+                            <a href="{{ path('app_register') }}" >
+                                Sign Up
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+       </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+ {% block javascripts %}
+     {{ parent() }}
+     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+ {% endblock %}

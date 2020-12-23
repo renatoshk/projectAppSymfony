@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% form_theme registrationForm _self %}
+{% block title %}Log in!{% endblock %}
+ {% block stylesheets %}
+     {{ parent() }}
+ {% endblock %}
+{% block body %}
+<div class="container">
+    <div id="registerbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info" >
+            <div style="padding-top:30px" class="panel-body" >
+                {{ form_start(registrationForm)}}
+                <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+                <div class="form-group">
+                    {{ form_row(registrationForm.email,{
+                        attr:{placeholder: 'Email', class:'form-control'}
+                    }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.password,{
+                        attr:{placeholder: 'Password', class:'form-control'}
+                    }) }}
+                </div>
+                <div class="form-group">
+                    <button style="margin-top:10px" class="btn btn-lg btn-primary" type="submit">
+                        Sign in
+                    </button>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-12 control">
+                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                        Do u have an account!
+                        <a href="{{ path('app_login') }}" >
+                            Sign In
+                        </a>
+                    </div>
+                 </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {{ form_end(registrationForm) }}
+{% endblock %}
+ {% block javascripts %}
+     {{ parent() }}
+     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+ {% endblock %}

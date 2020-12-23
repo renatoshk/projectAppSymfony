@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{{ parent() }}
+    <h1 class="text-center">My Projects</h1>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for projectMember in projects %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ projectMember }}</td>
+                <td>{{ projectMember.project.category }}</td>
+                <td>{{ projectMember.project.description }}</td>
+                <td><a href="{{ path('add_role_to_project', {id:projectMember.project.id}) }}"><button class="btn btn-primary">Add Person</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+{% endblock %}
