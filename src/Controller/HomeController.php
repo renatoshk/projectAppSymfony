@@ -7,6 +7,7 @@ use App\Entity\ProjectMember;
 use App\Entity\User;
 use App\Form\AddProjectFormType;
 use App\Form\PersonRoleFormType;
+use App\Form\SearchDataFormType;
 use App\Repository\ProjectMemberRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -138,5 +139,16 @@ class HomeController extends AbstractController
          else{
              return new JsonResponse(['code'=>'error', 'message'=>'Unable to find that member!']);
          }
+    }
+
+    /**
+     * @Route("/search-to-project", name="search_index")
+     */
+    public function displayDataToSearchFile(Request $request){
+        $form = $this->createForm(SearchDataFormType::class);
+
+        return $this->render('admin/search.html.twig', [
+            'formSearch' => $form->createView()
+        ]);
     }
 }

@@ -54,7 +54,18 @@ body {
     text-decoration: none;
 }
 .footer {
-    background-color: #5CB85C;
-    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    height:60px;   /* Height of the footer */
+    background:#6cf;
     text-align: center;
+    padding: 20px;
+}
+.report {
+    float: right;
+}
+.searchData{
+    text-align: center;
+    padding: 50px;
 }
