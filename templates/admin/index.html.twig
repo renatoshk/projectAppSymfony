@@ -8,7 +8,7 @@
         <div class="col-md-12">
         <table class="table table-bordered table-hover">
             <thead>
-                <tr>
+                <tr class="primaryProject">
                     <th class="td-width-1">#</th>
                     <th class="td-width-1">Name</th>
                     <th class="td-width-1">Category</th>
@@ -22,27 +22,33 @@
                     {% set project = projectData['project'] %}
                      {% set projectMembers = projectData['members'] %}
 
-                    <tr id="{{ project.id}}">
+                    <tr>
                         <th scope="row">{{ loop.index }}</th>
                         <td>{{ project.name }}</td>
                         <td>{{ project.category }}</td>
                         <td>{{ project.description }}</td>
-                        <td><button id="change" class="btn btn-success"><span class="fa fa-eye"></span></button></td>
+                        <td>
+                            <button  class=" btn btn-success change" data-project-id="{{ project.id }}"><span class="fa fa-eye"></span></button>
+                        </td>
                         <td><a href="{{ path('add_role_to_project',{id:project.id}) }}"><button  class="btn btn-primary">Add Person</button></a></td>
                     </tr>
-                    {% for projectMember in projectMembers  %}
-                    <tr class="member" style="display: none;">
-                        <th colspan="2" class="td-width-1">Member {{ loop.index }}</th>
+                    <tr class="member-{{ project.id }}" style="display: none;">
+                        <th colspan="2" class="td-width-1">Members</th>
                         <th colspan="2">Role</th>
                         <th colspan="100"></th>
                     </tr>
-                    <tr class="member" style="display: none;">
+                    {% for projectMember in projectMembers  %}
+                    <tr class="member-{{ project.id }} projectMember-{{ projectMember.id }}" style="display: none;">
                         <td colspan="2">{{ projectMember.user  }}</td>
                         <td colspan="2">{{ projectMember.projectRole }}</td>
                         {% if projectMember.projectRole  != 'admin' %}
-                          <td colspan="100"><button  class="btn btn-danger"><span class="fa fa-trash"></span></button></td>
+                        <td colspan="100">
+                            <button class="btn btn-danger deleteMember" data-member-id="{{ projectMember.id }}">
+                                <span class="fa fa-trash"></span>
+                            </button>
+                        </td>
                         {% else %}
-                          <td colspan="100"></td>
+                            <td colspan="100"></td>
                         {% endif %}
                     </tr>
                     {% endfor %}
@@ -58,8 +64,30 @@
   {{ parent() }}
       <script>
           $(document).ready(function (){
-              $("#change").click(function (){
-                $(".member").show();
+             $( ".change").click(function (){
+                  var projectId  = $(this).data('project-id');
+                  $(this).find('span').toggleClass('fa fa-eye fa fa-eye-slash');
+                  $(".member-"+projectId).css("color", "green").toggle();
+             });
+             $( ".deleteMember").click(function (){
+                 var  projectMemberId  = $(this).data('member-id');
+                 $.ajax({
+                     type: "POST",
+                     url: "{{ path('remove_member_from_project') }}",
+                     dataType: "JSON",
+                     data: {
+                       id: projectMemberId
+                     },
+                     success: function (data){
+                         if (data['code'] == 'success'){
+                             $(".projectMember-"+projectMemberId).remove();
+                         }
+                         alert(data['message']);
+                     },
+                     error: function (error){
+                         console.log(error)
+                     }
+                 });
              });
           });
       </script>

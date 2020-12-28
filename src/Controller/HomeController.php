@@ -10,6 +10,7 @@ use App\Form\PersonRoleFormType;
 use App\Repository\ProjectMemberRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -76,7 +77,7 @@ class HomeController extends AbstractController
                 $em->persist($project);
                 $em->persist($member);
                 $em->flush();
-                return $this->render('home/index.html.twig');
+                return $this->redirectToRoute('homepage');
             }
         }
         return $this->render('home/new.html.twig', [
@@ -121,5 +122,21 @@ class HomeController extends AbstractController
         else {
             return $this->redirectToRoute('app_login');
         }
+    }
+    /**
+     * @Route("/remove-member", name="remove_member_from_project")
+     */
+    public function removeMemberFromProject(Request $request){
+         $projectMemberId = $request->get('id');
+         $em = $this->getDoctrine()->getManager();
+         $projectMember = $em->getRepository(ProjectMember::class)->find($projectMemberId);
+         if($projectMember){
+             $em->remove($projectMember);
+             $em->flush();
+             return new JsonResponse(['code'=>'success', 'message'=>'Removed!']);
+         }
+         else{
+             return new JsonResponse(['code'=>'error', 'message'=>'Unable to find that member!']);
+         }
     }
 }
