@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Form\AddProjectFormType;
 use App\Form\PersonRoleFormType;
 use App\Form\SearchDataFormType;
+use App\Form\TestFilterDataFormType;
 use App\Repository\ProjectMemberRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -146,9 +147,43 @@ class HomeController extends AbstractController
      */
     public function displayDataToSearchFile(Request $request){
         $form = $this->createForm(SearchDataFormType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $projectName = $data['name'];
+            $projectCategory = $data['category'];
+            $memberRole = $data['role'];
+            if(!is_null($projectName) || !is_null($projectCategory)){
 
+            }
+
+        }
+//         dd('here');
         return $this->render('admin/search.html.twig', [
             'formSearch' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route ("/search-test-data", name="search-test-data")
+     */
+    public  function searchTestData(Request $request){
+        $categories = $this->getDoctrine()->getManager()->getRepository(Project::class)
+            ->getCategories();
+        $form = $this->createForm(TestFilterDataFormType::class);
+        $form->handleRequest($request);
+        $projects = $this->getDoctrine()->getManager()->getRepository(Project::class)
+            ->findProjectsByCategory([], null);
+        if($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData();
+            $name = $data['name'];
+            $category = $data['category'];
+            $projects = $this->getDoctrine()->getManager()->getRepository(Project::class)
+                ->findProjectsByCategory($category, $name);
+        }
+        return $this->render('admin/testFilter.html.twig', [
+            'formTest' => $form->createView(),
+            'projects' => $projects
         ]);
     }
 }

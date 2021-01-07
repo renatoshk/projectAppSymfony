@@ -20,7 +20,7 @@ class PersonRoleFormType extends AbstractType
                         'manager'=>'manager',
                         'admin'=> 'admin',
                         'tester'=>'tester',
-                   ]
+                   ],
             ])
             ->add('user')
         ;

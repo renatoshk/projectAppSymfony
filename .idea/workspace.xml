@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4cee8884-26e0-4c4f-9d49-476060f19245" name="Default Changelist" comment="show and removed done">
+    <list default="true" id="4cee8884-26e0-4c4f-9d49-476060f19245" name="Default Changelist" comment="search form uncompleted">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Project.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PersonRoleFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PersonRoleFormType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ProjectRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProjectRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
@@ -154,7 +157,8 @@
       <workItem from="1608473081263" duration="1259000" />
       <workItem from="1608486560806" duration="1202000" />
       <workItem from="1608496440490" duration="8808000" />
-      <workItem from="1608537544137" duration="115486000" />
+      <workItem from="1608537544137" duration="172976000" />
+      <workItem from="1609857121999" duration="2935000" />
     </task>
     <task id="LOCAL-00001" summary="f">
       <created>1608731259233</created>
@@ -170,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609158811112</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="search form uncompleted">
+      <created>1609168667128</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1609168667128</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,10 +197,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="f" />
     <MESSAGE value="show and removed done" />
-    <option name="LAST_COMMIT_MESSAGE" value="show and removed done" />
+    <MESSAGE value="search form uncompleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="search form uncompleted" />
   </component>
 </project>

@@ -20,6 +20,32 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    //get Categories of Posts
+
+    /**
+     * @return Project[]
+     */
+    public function getCategories(){
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.category')
+            ->groupBy('p.category')
+            ->getQuery()
+            ->getScalarResult();
+        return $qb;
+    }
+    //find projects by category and by name
+    public function findProjectsByCategory($category, ?String $name){
+        $qb = $this->createQueryBuilder('p');
+        if(sizeof($category) > 0) {
+            $qb->andWhere('p.category IN(:category)')
+                ->setParameter('category', $category);
+        }
+        if($name){
+            $qb->andWhere('p.name LIKE  :name')
+                ->setParameter('name','%'.$name.'%');
+        }
+        return $qb->getQuery()->getResult();
+    }
     public function findProjectsByUser()
     {
 //        $qb = $this->createQueryBuilder('project')
